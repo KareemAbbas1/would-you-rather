@@ -1,26 +1,32 @@
-/* Log In Page */
-.login {
-    background: #1a2226;
-}
+/* Sign Up Page */
 
 .card-container {
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color:whitesmoke;
 }
 
-.login-form {
-    width: 100vw;
-    height: 100vh;
-    padding-top: 95px;
+.card-body {
+    display: grid;
+    width: 87%;
+    align-items: center;
+    border-radius: 5%;
+    margin-top: 30px;
+}
+
+.signup-form {
+    height: 80vh;
+    max-height: 450px;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
     background: #1a2226 !important;
     border: none;
 }
 
 .card-title {
-    margin-top: 10px;
+    padding-top: 25px;
+    color: white;
     margin-right: 12px;
 }
 
@@ -28,14 +34,97 @@
 .input[type='password'] {
     padding: 10px;
     background: whitesmoke;
-    border: 4px solid #0d6efd;
+    border: 2px solid  #212529;
     border-radius: 10px;
     margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.image {
+    width: 86%;
+     margin-top: 105px;
+     margin-left: 126px;
+    transform: rotateY(180deg);
+}
+
+
+/* Log In Page */
+
+.login-form {
+    height: 80vh;
+    max-height: 450px;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    background: #1a2226 !important;
+    border: none;
+}
+
+
+
+
+
+
+
+
+/* .login {
+    background: #1a2226;
+}
+
+.card-container {
+    height: 100%;
+    display: flex;
+    {align-items: center;
+    justify-content: center;} 
+    color:whitesmoke;
+}
+
+.card-body {
+    display: grid;
+    width: 87%;
+    align-items: center;
+    border-radius: 5%;
+    margin-top: 30px;
+}
+
+.login-form {
+    height: 80vh;
+    max-height: 450px;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    background: #1a2226 !important;
+    border: none;
+}
+
+.card-title {
+    padding-top: 25px;
+    color: white;
+    margin-right: 12px;
+}
+
+.input[type='email'],
+.input[type='password'] {
+    padding: 10px;
+    background: whitesmoke;
+    border: 2px solid  #212529;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.image {
+    width: 86%;
+     margin-top: 105px;
+     margin-left: 126px;
+    transform: rotateY(180deg);
 }
 
 .login-footer {
     margin-right: 25px;
 }
 
-
+ */
 
