@@ -1,99 +1,86 @@
-import { useRef, useState } from 'react'
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState, useRef } from 'react'
+import { useAuth } from '../../context/AuthContext'
 import { Container, Row, Col, Button, Card, FormGroup, Form, Alert } from 'react-bootstrap'
-import hero from '../assets/hero.svg'
-import '../App.css'
-import { useAuth } from '../context/AuthContext'
+import Hero from '../../assets/hero.svg' 
+import '../../App.css'
 import { Link, useHistory } from 'react-router-dom'
 
-const UpdateProfile = () => {
+const Login = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-    const { currentUser, updateEmail, updatePassword } = useAuth()
+    const { login } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
-    function handelSubmit(e) {
+    async function handelSubmit(e) {
         e.preventDefault()
 
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError("Passwords don't match")
+        try {
+            setError('')
+            setLoading(true)
+            await login(emailRef.current.value, passwordRef.current.value)
+            history.push('/')
+        }
+        catch {
+            setError('Failed to log in')
         }
 
-        const promises = []
-        setLoading(true)
-        setError('')
-
-        if (emailRef.current.value !== currentUser.email) {
-            promises.push(updateEmail(emailRef.current.value))
-        }
-
-        if (passwordRef.current.value) {
-            promises.push(updatePassword(passwordRef.current.value))
-        }
-
-        Promise.all(promises)
-            .then(() => {
-                history.push('/user')
-            })
-            .catch(() => {
-                setError('Failed to update account')
-            })
-            .finally(() => {
-                setLoading(false)
-            })
+        setLoading(false)
 
     }
 
+
+
     return (
-        <Container fluid className='signup px-0 no-gutters' style={{ height: '100vh' }}>
+        <Container fluid className='login px-0 no-gutters' style={{ height: '100vh' }}>
             <Row sm={4} className='no-gutters gx-0 bg-light'>
                 <Col sm={4} style={{ height: '100vh' }}>
                     <Container className='card-container bg-dark'>
                         <h1 className='card-title text-center'>Quick Surveys</h1>
-                        <Card className='container signup-form bg-dark'>
+                        <Card className='container login-form bg-dark'>
                             <Card.Body className='card-body bg-secondary'>
                                 {error && <Alert variant='danger'>{error}</Alert>}
                                 <Form onSubmit={handelSubmit} className='justify-content-center'>
-                                    <Form.Text className='text-center text-dark'><h2>Update Profile</h2></Form.Text>
+                                    <Form.Text className='text-center text-dark'><h2>Log In</h2></Form.Text>
                                     <FormGroup id='email'>
                                         <Form.Control
                                             type='email'
                                             ref={emailRef} required
                                             placeholder='Enter Eamil'
                                             className='input form-control form-control-sm'
-                                            defaultValue={currentUser.email}
                                         />
                                     </FormGroup>
 
                                     <FormGroup id='password'>
                                         <Form.Control
-                                            type='password'
+                                            type='password' required
                                             ref={passwordRef}
-                                            placeholder='Enter New Password'
-                                            className='input form-control form-control-sm'
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup id='password-confirm '>
-                                        <Form.Control
-                                            type='password'
-                                            ref={passwordConfirmRef}
-                                            placeholder='Confimr New Password'
+                                            placeholder='Enter Password'
                                             className='input form-control form-control-sm'
                                         />
                                     </FormGroup>
 
                                     <div className="d-grid login-button">
                                         <Button disabled={loading} type='submit' variant="dark" size="lg">
-                                            Update Profile
+                                            Log In
                                         </Button>
 
                                         <div className='signup'>
-                                            <Link to='/'>Cancel</Link>
+                                            <Link to='/signup'>
+                                                <Button className='text-dark' type='submit' variant="secondary" size="sm">
+                                                    <strong>Create Account</strong>
+                                                </Button>
+                                            </Link>
+
+                                            <Link to='/forgot-password'>
+                                                <Button className='text-dark' type='submit' variant="secondary" size="sm" style={{ float: 'right' }}>
+                                                    <strong>Forgot Password</strong>
+                                                </Button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </Form>
@@ -103,11 +90,18 @@ const UpdateProfile = () => {
                 </Col>
 
                 <Col sm={8}>
-                    <img className='image img-fluid' src={hero} alt='background' />
+                    <img className='image img-fluid' src={Hero} alt='background' />
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default UpdateProfile
+export default Login
+
+
+/*
+    <div className='login-footer'>
+        <p className='text-center text-light'>Kareem Abbas &copy; 2021</p>
+    </div>
+*/

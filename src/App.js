@@ -1,18 +1,27 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Home from './components/Home'
-import Login from './components/Login';
-import Signup from './components/Signup';
-import { AuthProvider } from './context/AuthContext';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import PrivateRoute from './components/PrivateRoute';
-import ForgotPassword from './components/ForgotPassword';
-import UpdateProfile from './components/UpdateProfile';
-import User from './components/User'
-
+// import Home from './components/pages/Home'
+// import Login from './components/pages/Login'
+// import Signup from './components/pages/Signup';
+// import { AuthProvider } from './context/AuthContext';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+// import PrivateRoute from './components/PrivateRoute';
+// import ForgotPassword from './components/pages/ForgotPassword';
+// import UpdateProfile from './components/pages/UpdateProfile';
+// import User from './components/pages/User'
+import Nav from './components/Nav'
 function App() {
   return (
-    <Router>
+    <div>
+      <Nav />
+    </div>    
+  );
+}
+
+export default App;
+/* 
+
+<Router>
       <div className="App">
         <AuthProvider>
           <Switch>
@@ -27,8 +36,5 @@ function App() {
       </div>
     </Router>
 
-  );
-}
 
-export default App;
-/* <Login/> */
+<Login/> */

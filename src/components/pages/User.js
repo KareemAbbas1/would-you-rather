@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Container, Card, Button, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
 const User = () => {
 

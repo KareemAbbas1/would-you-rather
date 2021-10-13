@@ -25,7 +25,7 @@ let users = {
   
     johndoe: {
       id: 'johndoe',
-      name: 'John Doe',
+       name: 'John Doe',
       avatarURL ,
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
@@ -191,7 +191,7 @@ let users = {
             }
           }
         }
-  
+   
         questions = {
           ...questions,
           [qid]: {

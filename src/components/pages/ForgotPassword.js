@@ -1,10 +1,10 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState, useRef } from 'react'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 import { Container, Row, Col, Button, Card, FormGroup, Form, Alert } from 'react-bootstrap'
-import hero from '../assets/hero.svg'
-import '../App.css'
+import hero from '../../assets/hero.svg'
+import '../../App.css'
 import { Link } from 'react-router-dom'
 
 const ForgotPassword = () => {
