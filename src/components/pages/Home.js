@@ -1,38 +1,53 @@
-import { useState } from 'react'
-import { useAuth } from '../../context/AuthContext'
-import { Button, Alert } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom'
+import React from 'react';
+import { Container, Tabs, Tab } from "react-bootstrap";
+import { Component } from "react";
+import PollsList from "../PollsList";
+import { connect } from 'react-redux';
 
-const Home = () => {
 
-  const [error, setError] = useState('')
-  const { logout } = useAuth()
-  const history = useHistory()
+class Home extends Component {
 
-  async function handleLogout() {
+  render() {
 
-    setError('')
+    const { answeredPolls, unansweredPolls } = this.props;
 
-    try {
-      await logout()
-      history.push('/login')
-    }
-    catch {
-      setError('Failed to log out')
-    }
+    return (
+
+      <Container className='mt-5 pb-2 bg-light'>
+        <Tabs
+          defaultActiveKey='unanswered'
+          id="polls-list"
+          className="mb-3 d-flex justify-content-center"
+        >
+          <Tab eventKey="unanswered" title="Unanswered Polls">
+            <PollsList polls={unansweredPolls} />
+          </Tab>
+
+          <Tab eventKey="answered" title="Answered Polls">
+            <PollsList polls={answeredPolls} />
+          </Tab>
+
+        </Tabs>
+      </Container>
+    )
   }
-
-  return (
-    <div>
-      Home<br></br>
-      <Link to='/user'>Profile</Link>
-      {error && <Alert variant='danger'>{error}</Alert>}
-      {/* User: {currentUser.email} */}
-      <div className='w-100 text-center mt-2'>
-        <Button variant='dark' onClick={handleLogout}>Log out</Button>
-      </div>
-    </div>
-  )
 }
 
-export default Home
+function mapStateToProps({ authedUser, questions, users }) {
+
+  const answeredPolls = Object.keys(questions)
+    .filter(id => users[authedUser].answers.hasOwnProperty(id))
+    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+
+  const unansweredPolls = Object.keys(questions)
+    .filter(id => !users[authedUser].answers.hasOwnProperty(id))
+    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+
+  return {
+    answeredPolls,
+    unansweredPolls
+  };
+
+};
+
+export default connect(mapStateToProps)(Home);
