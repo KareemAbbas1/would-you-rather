@@ -3,7 +3,7 @@ import UserCard from '../UserCard';
 import { connect } from 'react-redux';
 import { Container } from 'react-bootstrap';
 
-class LeaderBoard extends Component {
+class Leaderboard extends Component {
     render() {
 
         return (
@@ -35,4 +35,4 @@ function mapStateToProps({ users }) {
     };
 };
 
-export default connect(mapStateToProps)(LeaderBoard);
+export default connect(mapStateToProps)(Leaderboard);
