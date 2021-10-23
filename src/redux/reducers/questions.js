@@ -11,11 +11,10 @@ const questions = (state = {}, action) => {
             };
 
         case types.ADD_QUESTION:
-            return {
 
+            return {
                 ...state,
                 [action.question.id]: action.question
-
             };
 
         case types.ADD_ANSWER:

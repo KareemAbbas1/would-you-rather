@@ -14,7 +14,6 @@ import PrivateRoute from './components/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { handleInitialData } from './redux/actions/index';
-// import { NotFound } from 'http-errors';
 
 
 function App() {

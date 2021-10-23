@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { handleAddAnswer } from '../redux/actions/usersAction';
 import NotFound from './pages/NotFound';
 import { withRouter, Link } from 'react-router-dom';
-// import { handleInitialData } from '../redux/actions';
 
 class UnansweredPoll extends Component {
 
@@ -25,7 +24,6 @@ class UnansweredPoll extends Component {
         e.preventDefault();
 
         (answer !== '' ? dispatch(handleAddAnswer(id, answer)) && this.redirectToHome() : this.setState({ error: 'Make a choice to submit' }));
-        // dispatch(handleInitialData());
     };
 
     render() {

@@ -1,5 +1,6 @@
 import * as types from './actionsTypes';
-import { saveQuestion} from '../../utils/api';
+import { saveQuestion } from '../../utils/api';
+import { addQuestionToUser } from './usersAction';
 
 export const getQuestions = (questions) => {
     return {
@@ -31,8 +32,11 @@ export function handleAddQuestion(otionOne, optionTwo) {
     return async (dispatch, getState) => {
         const { authedUser } = getState();
 
-        return saveQuestion({ otionOneText: otionOne, optionTwoText: optionTwo, authedUser })
-            .then(question => dispatch(addQuestion(question)))
+        return saveQuestion({ otionOneText: otionOne, optionTwoText: optionTwo, author: authedUser })
+            .then(question => {
+                dispatch(addQuestion(question));
+                dispatch(addQuestionToUser(question));
+            })
     };
 };
 

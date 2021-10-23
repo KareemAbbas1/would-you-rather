@@ -9,10 +9,11 @@ import { throttle } from "lodash";
 const middleware = [thunk];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer,  loadState(), composeEnhancers(applyMiddleware(...middleware, logger)));
+const store = createStore(rootReducer, loadState(), composeEnhancers(applyMiddleware(...middleware, logger)));
 
 store.subscribe(
     throttle(() => saveState(store.getState()), 1000)
 );
+
 
 export default store;

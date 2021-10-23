@@ -20,6 +20,14 @@ const addAnswerToUser = ({ qid, authedUser, answer }) => {
     }
 };
 
+export const addQuestionToUser = ({ id, author }) => {
+    return {
+        type: types.ADD_QUESTION_TO_USER,
+        id,
+        author
+    };
+};
+
 
 
 export function handleAddAnswer(qid, answer) {
@@ -31,8 +39,5 @@ export function handleAddAnswer(qid, answer) {
 
         return saveQuestionAnswer({ qid, authedUser, answer });
 
-        // return saveQuestionAnswer({ qid, authedUser, answer })
-        //     .then(() => dispatch(addAnswerToUser({ qid, authedUser, answer })))
-        //     .then(() => dispatch(addAnswer({ qid, authedUser, answer })))
     };
 };

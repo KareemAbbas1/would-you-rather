@@ -33,10 +33,10 @@ class AnsweredPoll extends Component {
                             <Col lg={10} md={8} className=''>
                                 <Card.Header className='bg-light text-dark'>Poll's Result :</Card.Header>
                                 <Card.Body className=''>
-                                    <Card.Title className='mb-4'>{'optionOne.text'}</Card.Title>
+                                    <Card.Title className='mb-4'>{optionOne.text}</Card.Title>
                                     <ProgressBar variant='secondary' now={optionOneVotes} label={`${optionOneVotes}%`} />
                                     <hr></hr>
-                                    <Card.Title>{'optionTwo.text'}</Card.Title>
+                                    <Card.Title>{optionTwo.text}</Card.Title>
                                     <ProgressBar variant='secondary' now={optionTwoVotes} label={`${optionTwoVotes}%`} />
                                     <hr></hr>
                                     <Link to='/'>
