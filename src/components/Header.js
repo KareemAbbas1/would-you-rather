@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Navbar, NavDropdown, Nav, Container, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+// import { handleInitialData } from '../redux/actions';
 import { logout } from '../redux/actions/authAction';
 
 class Header extends Component{
@@ -9,8 +10,12 @@ class Header extends Component{
     render() {
         
         const { user, dispatch } = this.props;
+        // console.log('User', user)
+        // const {id} = user;
+        // console.log(id);
         const handleLogout = () => {
-            dispatch(logout());
+            dispatch(logout())
+            // dispatch(handleInitialData());
         };
 
         return (
@@ -45,7 +50,7 @@ class Header extends Component{
 
 function mapStateToProps({ users, authedUser }) {
     return {
-        user: users[authedUser]
+        user: authedUser && users[authedUser]
     };
 };
 

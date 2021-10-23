@@ -16,7 +16,7 @@ class PollModel extends Component {
                     <Container className='px-0 no-gutters'>
                         <Row className='px-0 gx-0 no-gutters'>
                             <Col lg={2} md={4} sm={12}>
-                                <Container className=''>
+                                <Container>
                                     <Card.Header className='text-center text-dark bg-light'>{name} Asks :</Card.Header>
                                     <Card.Body className='d-flex align-items-center justify-content-center'>
                                         <Image className='img-fluid' src={avatarURL} roundedCircle />

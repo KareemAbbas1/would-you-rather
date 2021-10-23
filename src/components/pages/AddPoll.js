@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-const AddPoll = () => {
-    return (
-        <div>
-            Add Poll
-        </div>
-    )
+
+class AddPoll extends Component {
+    render() {
+
+        return (
+            <div>
+                Add Poll
+            </div>
+        )
+    }
 }
 
-export default AddPoll
+function mapStateToProps() {};
+
+export default withRouter(connect(mapStateToProps)(AddPoll));

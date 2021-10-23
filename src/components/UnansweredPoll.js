@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Card, Row, Col, Image, Button, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { handleAddAnswer } from '../redux/actions/questionActions';
+import { handleAddAnswer } from '../redux/actions/usersAction';
 import NotFound from './pages/NotFound';
+import { withRouter, Link } from 'react-router-dom';
+// import { handleInitialData } from '../redux/actions';
 
 class UnansweredPoll extends Component {
 
@@ -10,24 +12,28 @@ class UnansweredPoll extends Component {
         error: ''
     };
 
+    redirectToHome = () => {
+        const { history } = this.props;
+        history.push('/');
+    }
+
     handleSubmit = (e, id) => {
-        
+
         const answer = this.form.answer.value;
         const { dispatch } = this.props;
-        
+
         e.preventDefault();
 
-        (answer !== '' ? dispatch(handleAddAnswer(id, answer)) : this.setState({ error: 'Make a choice to submit' }));
-
-
+        (answer !== '' ? dispatch(handleAddAnswer(id, answer)) && this.redirectToHome() : this.setState({ error: 'Make a choice to submit' }));
+        // dispatch(handleInitialData());
     };
 
     render() {
 
         const { question, author } = this.props;
-        
+
         question === null && <NotFound />
-        
+
         const { optionOne, optionTwo, id } = question;
         const { name, avatarURL } = author;
         const { error } = this.state;
@@ -35,6 +41,8 @@ class UnansweredPoll extends Component {
 
         return (
             <Container>
+                <h2 className='pt-4 text-center'>Would You Rather</h2>
+                <hr className='mb-5'></hr>
                 <Card className="my-3 bg-light text-dark">
                     <Container className='px-0 no-gutters'>
                         <Row className='px-0 gx-0 no-gutters'>
@@ -48,13 +56,13 @@ class UnansweredPoll extends Component {
                             </Col>
 
                             <Col lg={10} md={8} className=''>
-                                <Card.Header className='bg-light text-center text-dark'>
+                                <Card.Header className='bg-light text-dark'>
                                     Would you rather
 
                                 </Card.Header>
 
-                                <Card.Body className='text-center'>
-                                        {error && <Alert variant='danger'>{error}</Alert>}
+                                <Card.Body className=''>
+                                    {error && <Alert variant='danger'>{error}</Alert>}
                                     <Form onSubmit={(e) => this.handleSubmit(e, id)} ref={f => (this.form = f)}>
 
                                         <Form.Check
@@ -64,7 +72,7 @@ class UnansweredPoll extends Component {
                                             value="optionOne"
                                             name="answer"
                                         />
-                                        <h6 className=''>Or</h6>
+                                        <hr></hr>
                                         <Form.Check
                                             type="radio"
                                             id="optionTwo"
@@ -72,7 +80,7 @@ class UnansweredPoll extends Component {
                                             value="optionTwo"
                                             name="answer"
                                         />
-                                        
+
                                         <Button type='submit' variant="dark" className='w-100 mt-3'>Submit</Button>
                                     </Form>
                                 </Card.Body>
@@ -80,6 +88,9 @@ class UnansweredPoll extends Component {
                         </Row>
                     </Container>
                 </Card>
+                <Link to='/'>
+                    <Button variant='dark' style={{ float: 'right' }}>Cancel</Button>
+                </Link>
             </Container>
         )
     }
@@ -89,10 +100,10 @@ function mapStateToProps({ questions, users }, { id }) {
     const question = questions[id];
 
     return {
-        question: question ? question : null,
-        author: question ? users[question.author] : null
+        question,
+        author: users[question.author]
     }
 };
 
 
-export default connect(mapStateToProps)(UnansweredPoll);
+export default withRouter(connect(mapStateToProps)(UnansweredPoll));

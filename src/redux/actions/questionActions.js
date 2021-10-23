@@ -1,5 +1,5 @@
 import * as types from './actionsTypes';
-import { saveQuestion, saveQuestionAnswer } from '../../utils/api';
+import { saveQuestion} from '../../utils/api';
 
 export const getQuestions = (questions) => {
     return {
@@ -15,7 +15,7 @@ function addQuestion(question) {
     }
 };
 
-function addAnswer({ qid, authedUser, answer }) {
+export function addAnswer({ qid, authedUser, answer }) {
     return {
         type: types.ADD_ANSWER,
         info: {
@@ -37,12 +37,4 @@ export function handleAddQuestion(otionOne, optionTwo) {
 };
 
 
-export function handleAddAnswer(qid, answer) {
-    return async (dispatch, getState) => {
-        const { authedUser } = getState();
-
-        return saveQuestionAnswer({ qid, authedUser, answer })
-            .then(() => dispatch(addAnswer({ qid, authedUser, answer })))
-    };
-};
 

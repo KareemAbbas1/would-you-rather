@@ -13,33 +13,33 @@ class Home extends Component {
 
     return (
 
-      <Container className='mt-5 pb-2 bg-light'>
-        <Tabs
-          defaultActiveKey='unanswered'
-          id="polls-list"
-          className="mb-3 d-flex justify-content-center"
-        >
-          <Tab eventKey="unanswered" title="Unanswered Polls">
-            <PollsList polls={unansweredPolls} />
-          </Tab>
+        <Container className='mt-5 pb-2 bg-light'>
+          <Tabs
+            defaultActiveKey='unanswered'
+            id="polls-list"
+            className="mb-3 d-flex justify-content-center"
+          >
+            <Tab eventKey="unanswered" title="Unanswered Polls">
+              <PollsList polls={unansweredPolls} />
+            </Tab>
 
-          <Tab eventKey="answered" title="Answered Polls">
-            <PollsList polls={answeredPolls} />
-          </Tab>
+            <Tab eventKey="answered" title="Answered Polls">
+              <PollsList polls={answeredPolls} />
+            </Tab>
 
-        </Tabs>
-      </Container>
+          </Tabs>
+        </Container>
     )
   }
-}
+};
 
 function mapStateToProps({ authedUser, questions, users }) {
 
-  const answeredPolls = Object.keys(questions)
+  const answeredPolls = authedUser && Object.keys(questions)
     .filter(id => users[authedUser].answers.hasOwnProperty(id))
     .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 
-  const unansweredPolls = Object.keys(questions)
+  const unansweredPolls = authedUser && Object.keys(questions)
     .filter(id => !users[authedUser].answers.hasOwnProperty(id))
     .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 

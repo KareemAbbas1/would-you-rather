@@ -14,6 +14,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { handleInitialData } from './redux/actions/index';
+// import { NotFound } from 'http-errors';
 
 
 function App() {
@@ -29,18 +30,18 @@ function App() {
       <div className="App">
         <Route path='/login' component={Login} />
         <div>
-            <PrivateRoute component={Header} />
+          <PrivateRoute component={Header} />
           <Switch>
             <PrivateRoute path='/' exact component={Home} />
-            <Route path='/leaderboard' component={LeaderBoard} />
-            <Route path='/addquestion' component={AddPoll} />
-            <Route path='/questions/:id' component={PollPage} />
+            <PrivateRoute path='/leaderboard' component={LeaderBoard} />
+            <PrivateRoute path='/addquestion' component={AddPoll} />
+            <PrivateRoute path='/questions/:id' component={PollPage} />
           </Switch>
         </div>
       </div>
     </Router>
 
   );
-}
+};
 
 export default App;
