@@ -47,7 +47,7 @@ class AddPoll extends Component {
 
                     <Form.Control
                         type='text'
-                        placeholder='Enter second choice'
+                        placeholder='Enter first choice'
                         id='optionOne'
                         value={optionOne}
                         onChange={this.handleChange}
