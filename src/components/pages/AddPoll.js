@@ -28,7 +28,10 @@ class AddPoll extends Component {
 
         e.preventDefault();
 
-        (optionOne && optionTwo !== '' ? dispatch(handleAddQuestion(optionOne, optionTwo)) && this.redirectToHome() : this.setState({ error: 'Please enter two choices to submit' }));
+        (optionOne && optionTwo !== '' ?
+            dispatch(handleAddQuestion(optionOne, optionTwo)) && this.redirectToHome() :
+            this.setState({ error: 'Please enter two choices to submit' })
+        );
     };
 
     render() {
@@ -77,6 +80,5 @@ class AddPoll extends Component {
     }
 }
 
-function mapStateToProps() { };
 
-export default withRouter(connect(mapStateToProps)(AddPoll));
+export default withRouter(connect()(AddPoll));

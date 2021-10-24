@@ -14,6 +14,6 @@ const store = createStore(rootReducer, loadState(), composeEnhancers(applyMiddle
 store.subscribe(
     throttle(() => saveState(store.getState()), 1000)
 );
-
+// window.localStorage.clear();
 
 export default store;

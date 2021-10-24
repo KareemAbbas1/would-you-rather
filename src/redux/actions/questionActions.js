@@ -28,11 +28,11 @@ export function addAnswer({ qid, authedUser, answer }) {
 };
 
 
-export function handleAddQuestion(otionOne, optionTwo) {
+export function handleAddQuestion(optionOne, optionTwo) {
     return async (dispatch, getState) => {
         const { authedUser } = getState();
 
-        return saveQuestion({ otionOneText: otionOne, optionTwoText: optionTwo, author: authedUser })
+        return saveQuestion({ optionOneText: optionOne, optionTwoText: optionTwo, author: authedUser })
             .then(question => {
                 dispatch(addQuestion(question));
                 dispatch(addQuestionToUser(question));
