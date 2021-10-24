@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import PollPage from './components/pages/PollPage';
 import Leaderboard from './components/pages/Leaderboard';
 import AddPoll from './components/pages/AddPoll';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 
 
@@ -28,15 +28,11 @@ function App() {
     <Router>
       <div className="App">
         <Route path='/login' component={Login} />
-        <div>
-          <PrivateRoute component={Header} />
-          <Switch>
-            <PrivateRoute path='/' exact component={Home} />
-            <PrivateRoute path='/leaderboard' component={Leaderboard} />
-            <PrivateRoute path='/addquestion' component={AddPoll} />
-            <PrivateRoute path='/questions/:id' component={PollPage} />
-          </Switch>
-        </div>
+        <PrivateRoute component={Header} />
+        <PrivateRoute path='/' exact component={Home} />
+        <PrivateRoute path='/leaderboard' component={Leaderboard} />
+        <PrivateRoute path='/addquestion' component={AddPoll} />
+        <PrivateRoute path='/questions/:id' component={PollPage} />
       </div>
     </Router>
 

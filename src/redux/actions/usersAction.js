@@ -34,10 +34,13 @@ export function handleAddAnswer(qid, answer) {
     return async (dispatch, getState) => {
         const { authedUser } = getState();
 
-        dispatch(addAnswerToUser({ qid, authedUser, answer }));
-        dispatch(addAnswer({ qid, authedUser, answer }));
+        return saveQuestionAnswer({ qid, authedUser, answer })
+            .then(() => {
+                dispatch(addAnswerToUser({ qid, authedUser, answer }))
+                dispatch(addAnswer({ qid, authedUser, answer }))
+            })
 
-        return saveQuestionAnswer({ qid, authedUser, answer });
+
 
     };
 };
