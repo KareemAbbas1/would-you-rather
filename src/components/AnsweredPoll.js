@@ -40,17 +40,17 @@ class AnsweredPoll extends Component {
                             <Col lg={10} md={8} className=''>
                                 <Card.Header className='bg-light text-dark'>Poll's Result :</Card.Header>
                                 <Card.Body className=''>
-                                    {optionOne.votes.includes(authedUser) && <p style={{float: 'right'}}>Your vote</p>}
                                     <Card.Title className='mb-2'>{optionOne.text}</Card.Title>
                                     <ProgressBar variant='secondary' now={optionOneVotes} label={`${optionOneVotes}%`} />
                                     <span>{votedForOption1} {votedForOption1 === 1 ? 'person' : 'people'} voted for this</span>
+                                    {optionOne.votes.includes(authedUser) && <p style={{float: 'right'}}>Your vote</p>}
 
                                     <hr></hr>
 
-                                    {optionTwo.votes.includes(authedUser) && <p style={{float: 'right'}}>Your vote</p>}
                                     <Card.Title>{optionTwo.text}</Card.Title>
                                     <ProgressBar variant='secondary' now={optionTwoVotes} label={`${optionTwoVotes}%`} />
                                     <span>{votedForOption2} {votedForOption2 === 1 ? 'person' : 'people'} voted for this</span>
+                                    {optionTwo.votes.includes(authedUser) && <p style={{float: 'right'}}>Your vote</p>}
                                     <hr></hr>
                                     <Link to='/'>
                                         <Button variant="dark" className='w-100 mt-3'>Back to Dashboard</Button>
