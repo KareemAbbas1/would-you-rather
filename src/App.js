@@ -6,7 +6,8 @@ import Home from './components/pages/Home';
 import PollPage from './components/pages/PollPage';
 import Leaderboard from './components/pages/Leaderboard';
 import AddPoll from './components/pages/AddPoll';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { NotFound } from 'http-errors';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 
@@ -24,7 +25,7 @@ function App() {
     dispatch(handleInitialData());
   }, [dispatch]);
 
-  if(!authedUser) {
+  if (!authedUser) {
     return (
       <Router>
         <Route path='/' component={Login} />
@@ -35,11 +36,14 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Route component={Header} />
-        <Route path='/' exact component={Home} />
-        <Route path='/leaderboard' component={Leaderboard} />
-        <Route path='/addquestion' component={AddPoll} />
-        <Route path='/questions/:id' component={PollPage} />
+          <Header />
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/leaderboard' component={Leaderboard} />
+          <Route path='/addquestion' component={AddPoll} />
+          <Route path='/questions/:id' component={PollPage} />
+          <Route component={NotFound} />
+        </Switch>
       </div>
     </Router>
 

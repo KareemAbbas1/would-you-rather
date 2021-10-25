@@ -11,8 +11,6 @@ class PollPage extends Component{
         const { userAnswers, match } = this.props;
         const id = match.params.id;
         const answered = userAnswers.hasOwnProperty(id) ? true : false;
-        // console.log('userAns', userAnswers);
-        // console.log('Match', match)
 
         return (
             <div>
@@ -23,7 +21,7 @@ class PollPage extends Component{
 }
 
 function mapStateToProps({ authedUser, users }) {
-    const userAnswers = users[authedUser].answers;
+    const userAnswers = authedUser && users[authedUser].answers;
 
     return {
         userAnswers

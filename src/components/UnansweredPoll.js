@@ -3,19 +3,13 @@ import { Container, Card, Row, Col, Image, Button, Form, Alert } from 'react-boo
 import { connect } from 'react-redux';
 import { handleAddAnswer } from '../redux/actions/usersAction';
 import NotFound from './pages/NotFound';
-import { withRouter, Link } from 'react-router-dom';
-// import { handleInitialData } from '../redux/actions/index';
+import { Link } from 'react-router-dom';
 
 class UnansweredPoll extends Component {
 
     state = {
         error: ''
     };
-
-    redirectToHome = () => {
-        const { history } = this.props;
-        history.push('/');
-    }
 
     handleSubmit = (e, id) => {
 
@@ -25,17 +19,18 @@ class UnansweredPoll extends Component {
         e.preventDefault();
 
         (answer !== '' ?
-            dispatch(handleAddAnswer(id, answer)) && this.redirectToHome() :
+            dispatch(handleAddAnswer(id, answer)) :
             this.setState({ error: 'Make a choice to submit' })
         );
-        // dispatch(handleInitialData())
     };
 
     render() {
 
         const { question, author } = this.props;
 
-        question === null && <NotFound />
+        if(question === null) {
+            return <NotFound />
+        };
 
         const { optionOne, optionTwo, id } = question;
         const { name, avatarURL } = author;
@@ -103,10 +98,10 @@ function mapStateToProps({ questions, users }, { id }) {
     const question = questions[id];
 
     return {
-        question,
-        author: users[question.author]
+        question: question ? question : null,
+        author: question ? users[question.author] : null
     }
 };
 
 
-export default withRouter(connect(mapStateToProps)(UnansweredPoll));
+export default connect(mapStateToProps)(UnansweredPoll);
