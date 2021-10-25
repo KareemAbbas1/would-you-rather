@@ -7,11 +7,10 @@ import PollPage from './components/pages/PollPage';
 import Leaderboard from './components/pages/Leaderboard';
 import AddPoll from './components/pages/AddPoll';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
 
 
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { handleInitialData } from './redux/actions/index';
 
@@ -19,20 +18,28 @@ import { handleInitialData } from './redux/actions/index';
 function App() {
 
   const dispatch = useDispatch();
+  const { authedUser } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
 
+  if(!authedUser) {
+    return (
+      <Router>
+        <Route path='/' component={Login} />
+      </Router>
+    )
+  }
+
   return (
     <Router>
       <div className="App">
-        <Route path='/login' component={Login} />
-        <PrivateRoute component={Header} />
-        <PrivateRoute path='/' exact component={Home} />
-        <PrivateRoute path='/leaderboard' component={Leaderboard} />
-        <PrivateRoute path='/addquestion' component={AddPoll} />
-        <PrivateRoute path='/questions/:id' component={PollPage} />
+        <Route component={Header} />
+        <Route path='/' exact component={Home} />
+        <Route path='/leaderboard' component={Leaderboard} />
+        <Route path='/addquestion' component={AddPoll} />
+        <Route path='/questions/:id' component={PollPage} />
       </div>
     </Router>
 

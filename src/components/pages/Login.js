@@ -12,10 +12,10 @@ class Login extends Component {
         error: ''
     };
 
-    redirectToHome = () => {
-        const { history } = this.props;
-        history.push('/');
-    }
+    // redirectToHome = () => {
+    //     const { history } = this.props;
+    //     history.push('/');
+    // }
 
     
     handleSubmit = (e) => {
@@ -24,7 +24,7 @@ class Login extends Component {
         e.preventDefault();
         
         userID !== '' ? dispatch(login(userID)) : this.setState({ error: 'Choose a user to log in' });
-        this.redirectToHome();
+        // this.redirectToHome();
     };
     
     render() {

@@ -1,34 +1,35 @@
 import { Component } from 'react';
 import { Navbar, NavDropdown, Nav, Container, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-// import { handleInitialData } from '../redux/actions';
 import { logout } from '../redux/actions/authAction';
+import { Link } from 'react-router-dom';
 
-class Header extends Component{
-    
-    
+class Header extends Component {
+
+
     render() {
-        
+
         const { user, dispatch } = this.props;
-        // console.log('User', user)
-        // const {id} = user;
-        // console.log(id);
+    
         const handleLogout = () => {
             dispatch(logout())
-            // dispatch(handleInitialData());
         };
 
         return (
             <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="/" className='mx-5'>WouldYouRather</Navbar.Brand>
+                    <Navbar.Brand className='mx-5'>
+                        <Link to='/' className='text-light' style={{textDecoration: 'none'}}>
+                        WouldYouRather
+                        </Link>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" className='mx-5' />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Container className='w-50'>
                             <Nav className="me-5 d-flex justify-content-between align-items-center" >
-                                <Nav.Link href="/">Dashboard</Nav.Link>
-                                <Nav.Link href="/addquestion">Add New Poll</Nav.Link>
-                                <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
+                                <Link to='/' className='text-light' style={{ textDecoration: 'none' }}>Dashboard</Link>
+                                <Link to='/addquestion' className='text-light' style={{ textDecoration: 'none' }}>Add Poll</Link>
+                                <Link to='/leaderboard' className='text-light' style={{ textDecoration: 'none' }}>Leaderboard</Link>
                             </Nav>
                         </Container>
                         <Nav>
@@ -42,7 +43,7 @@ class Header extends Component{
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-        
+
             </div>
         )
     }
